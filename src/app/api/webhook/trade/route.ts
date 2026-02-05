@@ -3,6 +3,8 @@ import prisma from '@/lib/prisma';
 import { emitEvent } from '@/lib/events';
 import { WebhookTradePayload } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(request: NextRequest) {
   try {
     // Optional webhook authentication

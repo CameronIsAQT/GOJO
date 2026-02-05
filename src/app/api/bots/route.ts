@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/lib/prisma';
 import { getWalletBalances } from '@/lib/polygonscan';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const bots = await prisma.bot.findMany({
