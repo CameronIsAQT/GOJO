@@ -19,12 +19,19 @@ export async function OPTIONS() {
 
 export async function POST(request: NextRequest) {
   try {
-    // Optional webhook authentication
+    // Optional webhook authentication - only check if secret is explicitly set
     const webhookSecret = process.env.WEBHOOK_SECRET;
-    if (webhookSecret) {
+    if (webhookSecret && webhookSecret.length > 0) {
       const authHeader = request.headers.get('authorization');
       if (authHeader !== `Bearer ${webhookSecret}`) {
-        return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        console.log('Webhook auth failed - secret is set but header mismatch');
+        return NextResponse.json(
+          { error: 'Unauthorized', message: 'Invalid or missing Authorization header' },
+          {
+            status: 401,
+            headers: { 'Access-Control-Allow-Origin': '*' }
+          }
+        );
       }
     }
 
