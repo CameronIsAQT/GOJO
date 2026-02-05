@@ -1,4 +1,10 @@
 {
+  "crons": [
+    {
+      "path": "/api/cron/check-trades",
+      "schedule": "*/15 * * * *"
+    }
+  ],
   "headers": [
     {
       "source": "/api/webhook/(.*)",
