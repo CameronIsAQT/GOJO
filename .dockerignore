@@ -1,0 +1,41 @@
+# Dependencies
+node_modules
+npm-debug.log
+
+# Next.js
+.next
+out
+
+# Testing
+coverage
+tests
+*.test.ts
+*.test.tsx
+*.spec.ts
+
+# Development
+.env.local
+.env.development
+.env.development.local
+
+# Database
+*.db
+prisma/*.db
+prisma/*.db-journal
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git
+.gitignore
+
+# Docs
+README.md

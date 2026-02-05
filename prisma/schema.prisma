@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Bot {
+  id            String   @id @default(cuid())
+  name          String
+  walletAddress String   @unique
+  createdAt     DateTime @default(now())
+  trades        Trade[]
+  balanceSnapshots BalanceSnapshot[]
+}
+
+model Trade {
+  id              String   @id @default(cuid())
+  botId           String
+  bot             Bot      @relation(fields: [botId], references: [id], onDelete: Cascade)
+  marketId        String
+  marketQuestion  String
+  outcome         String
+  costUsdc        Float
+  shares          Float
+  potentialWin    Float
+  status          String   @default("PENDING") // PENDING, WON, LOST, CANCELLED
+  txHash          String?
+  createdAt       DateTime @default(now())
+  resolvedAt      DateTime?
+
+  @@index([botId])
+  @@index([status])
+  @@index([marketId])
+}
+
+model BalanceSnapshot {
+  id            String   @id @default(cuid())
+  botId         String
+  bot           Bot      @relation(fields: [botId], references: [id], onDelete: Cascade)
+  balanceUsdc   Float
+  balanceMatic  Float
+  timestamp     DateTime @default(now())
+
+  @@index([botId])
+  @@index([timestamp])
+}

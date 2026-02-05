@@ -3,25 +3,71 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #030712;
+  --foreground: #e2e8f0;
+  --ocean-deep: #061220;
+  --ocean-dark: #040a14;
+  --ocean-accent: #38bdf8;
+  --ocean-light: #7dd3fc;
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #020617 0%, #030712 40%, #041525 100%);
+  background-attachment: fixed;
+}
+
+/* Background image layer - glowing eyes */
+.bg-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('/eyes.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.15;
+  pointer-events: none;
+  z-index: 0;
+  filter: brightness(1.5) drop-shadow(0 0 40px rgba(56, 189, 248, 0.4));
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+/* Custom scrollbar for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #030712;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #38bdf8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7dd3fc;
+}
+
+/* Glassmorphism card effect */
+.glass-card {
+  background: rgba(3, 7, 18, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+}
+
+.glass-card:hover {
+  border-color: rgba(56, 189, 248, 0.3);
 }
